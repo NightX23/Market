@@ -1,0 +1,103 @@
+﻿@model TestIdentity.ViewModels.UserAndEmployeeViewModel
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+<div class="form-horizontal">
+    <h4>Employee</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.LabelFor(model => model.User.UserName, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.User.UserName, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.User.UserName, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.User.Password, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.PasswordFor(m => m.User.Password, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.User.ConfirmPassword, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.PasswordFor(m => m.User.ConfirmPassword, new { @class = "form-control" })
+        </div>
+    </div>
+    <br />
+    <hr />
+    <h2>Contact Information</h2>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Employee.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Employee.Name, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Employee.Name, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.User.Email, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.User.Email, new { @class = "form-control" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Employee.IdentificationId, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Employee.IdentificationId, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Employee.IdentificationId, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <!-- @Html.LabelFor(model => model.Employee.StatusId, "StatusId", htmlAttributes: new { @class = "control-label col-md-2" })-->
+        <div class="col-md-10">          
+            @Html.DropDownListFor(model => model.Employee.StatusId, (SelectList)ViewBag.StatusId, new { @style = "display:none", @disabled = "disabled", @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Employee.StatusId, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Employee.DepartmentId, "DepartmentId", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(model => model.Employee.DepartmentId, (SelectList)ViewBag.DepartmentId, "-Please Select-", new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Employee.DepartmentId, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Employee.PositionId, "PositionId", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <!--@Html.DropDownList("PositionId", null, htmlAttributes: new { @class = "form-control" })-->
+            @Html.DropDownListFor(model => model.Employee.PositionId, (SelectList)ViewBag.PositionId, "-Please Select-", new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Employee.PositionId, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Create" class="btn btn-default" />
+        </div>
+    </div>
+</div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
